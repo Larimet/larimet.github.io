@@ -1,0 +1,534 @@
+/* подключение файла reset */
+/* ./ - текущая директория */
+@import "./reset.css";
+/* google fonts dm sans and poppins */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/*
+font-family: "DM Sans", sans-serif;
+font-family: "Poppins", sans-serif;
+*/
+
+/* красные границы */
+/* * {
+  border: 1px solid red;
+} */
+
+/* переменные */
+:root {
+  --black: #171718;
+  --black-border: #26292d;
+  --white: #fff;
+  --purple: #5c62ec;
+
+  --text-color: var(--black);
+  /* чтобы bg зависел от черного цвета: */
+  --dark-bg: var(--black);
+  --dark-border: var(--black-border);
+  --header-text: var(--white);
+  --accent: var(--purple);
+
+  /* light mode */
+  --page-bg: var(--white);
+  --text-color: var(--black);
+
+  /* для карточек (в них тоже пропишем)*/
+  --project-card-bg: var(--white);
+  --project-card-text: var(--black);
+  --box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.25);
+}
+
+.dark {
+  /* dark mode */
+  --page-bg: #252526;
+  --text-color: var(--white);
+
+  --project-card-bg: var(--black);
+  --project-card-text: var(--white);
+  --box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* основной шрифт страницы */
+html,
+body {
+  font-family: "DM Sans", sans-serif;
+
+  /* у всего текста кроме нав.панели: */
+  letter-spacing: -0.5px;
+  /* чтобы подвал был всегда внизу экрана: */
+  /* и у .footer mtauto */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  /* для смены тем */
+  background-color: var(--page-bg);
+  color: var(--text-color);
+}
+
+.container {
+  /* такой margin разместит контейнер по центру */
+  margin: 0 auto;
+  /* для адаптации width делаем max, чтобы
+  если размер экрана меньше то
+  контейнер тоже будет уменьшаться */
+  max-width: 1200px;
+  padding: 0px 15px;
+  /* под контент 1200-15-15=1170px осталось */
+}
+
+/* nav */
+.nav {
+  padding: 20px 0;
+  background-color: var(--dark-bg);
+  color: var(--header-text);
+  border-bottom: 1px solid var(--dark-border);
+  letter-spacing: normal;
+}
+
+.nav-row {
+  display: flex;
+  justify-content: flex-end;
+  /* центрирование логотипа и остального */
+  align-items: center;
+  column-gap: 30px;
+  /* закоментить justify чтоб увидеть */
+  row-gap: 20px;
+  /* для моб. адаптации */
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-family: "Poppins", sans-serif;
+  color: var(--header-text);
+  font-size: 24px;
+  margin-right: auto;
+}
+
+.logo strong {
+  font-weight: 700;
+}
+
+.nav-list {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  column-gap: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  /* 500 т.к. medium */
+}
+
+.nav-list__link {
+  color: var(--header-text);
+
+  transition: opacity 0.2s ease-in;
+}
+
+.nav-list__link:hover {
+  opacity: 0.8;
+}
+
+.nav-list__link--active {
+  position: relative;
+  /* родитель для псевдоэлемента сама ссылка
+  без relative элемент бы работал
+  относительно всей страницы */
+}
+
+.nav-list__link--active::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  /* т.е. слева по границе ссылки */
+  top: 100%;
+  /* отступаем сверху ссылки 100%
+  и размещаем внизу */
+
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--accent);
+}
+
+/* header */
+.header {
+  /* для шапки остается 760-20-45=695 */
+  /* min если контента больше то она увел. */
+  min-height: 695px;
+  padding: 40px 0;
+  background-color: var(--dark-bg);
+
+  background-image: url("../img/header-bg.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  /* по гориз. и вертикали */
+  background-position: center center;
+
+  color: var(--header-text);
+  text-align: center;
+  /* чтоб выровнять header__wrapper: */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__wrapper {
+  /* max-width: 630px; из-за паддинг добавим: */
+  max-width: 660px;
+  /* чтоб на мобилах тоже были отступы: */
+  padding: 0 15px;
+}
+
+.header__title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.header__title strong {
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.header__title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.header__text {
+  font-size: 18px;
+  /* line-height: 24; */
+  /* ??? 24/18 = 1.333 ??? */
+  /* при 24 на странице очень много */
+  line-height: 1.333;
+  margin-bottom: 40px;
+}
+
+/* предусмотрим если много абзацев */
+/* p + p: у каждого кроме первого */
+/* 1em: 1 умножить на размер шрифта этого элемента */
+/* т.е. на 18px */
+.header__text p + p {
+  margin-top: 1em;
+}
+
+/* btn */
+.btn {
+  /* display inlineblock т.к. ссылка отображается
+  как inline элем. и нельзя полностью
+  работать с её размерами */
+  display: inline-block;
+  height: 48px;
+  /* ширину не указываем чтобы зависела от текста */
+  padding: 12px 28px;
+  background-color: var(--accent);
+  color: var(--white);
+  border-radius: 5px;
+  letter-spacing: 0.15px;
+  font-size: 16px;
+  font-weight: 500;
+
+  transition: opacity 0.2s ease-in;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn:active {
+  position: relative;
+  top: 1px;
+}
+
+/* btn outline */
+.btn-outline {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+
+  height: 48px;
+  padding: 12px 20px;
+
+  border-radius: 5px;
+  border: 1px solid #000;
+  color: var(--black);
+  background-color: var(--white);
+
+  transition: opacity 0.2s ease-in;
+}
+
+.btn-outline:hover {
+  opacity: 0.8;
+}
+
+.btn-outline:active {
+  position: relative;
+  top: 1px;
+}
+
+/* general */
+.section {
+  padding: 70px 0;
+}
+.title-1 {
+  margin-bottom: 60px;
+  font-size: 60px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent);
+  line-height: 1.3;
+}
+
+/* projects */
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 30px;
+  row-gap: 30px;
+}
+
+.project {
+  /* чтоб при адаптиве размер уменьшался
+  и не было гориз. скролла */
+  max-width: 370px;
+  background-color: var(--project-card-bg);
+  box-shadow: var(--box-shadow);
+  border-radius: 10px;
+}
+
+.project__img {
+  border-radius: 10px;
+}
+
+.project__title {
+  padding: 15px 20px 25px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  color: var(--project-card-text);
+}
+
+/* project details */
+.project-details {
+  /* по центру: */
+  margin: 0 auto;
+  max-width: 865px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.project-details__cover {
+  /* если будет уменьшаться project-details
+  то будет уменьшаться и cover: */
+  max-width: 100%;
+  margin-bottom: 40px;
+  box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.project-details__desc {
+  font-size: 24px;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* content list (skills) */
+.title-2 {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.content-list {
+  max-width: 570px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  row-gap: 40px;
+  /* блок как-то слева, делаем по центру: */
+  margin: 0 auto;
+}
+
+.content-list a {
+  color: var(--accent);
+}
+
+.content-list__item {
+  /* тег p сам унаследует свойства */
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+/* отступы между абзацами на будущее */
+.content-list__item p + p {
+  margin-top: 0.5em;
+}
+
+/* footer */
+.footer {
+  margin-top: auto;
+  background-color: var(--dark-bg);
+  padding: 60px 0px 50px;
+  color: var(--header-text);
+}
+
+.footer__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* отступ между копирайт и иконками: */
+  row-gap: 27px;
+}
+.social {
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+}
+
+.copyright {
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  line-height: 1.5;
+}
+
+/* если больше одного абзаца: */
+.copyright p + p {
+  margin-top: 0.5em;
+}
+
+/* dark mode btn */
+.dark-mode-btn {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  width: 51px;
+  height: 26px;
+  background-color: #272727;
+  position: relative;
+  order: 9;
+  border-radius: 50px;
+}
+
+/* делаем белый фон для солнышка */
+.dark-mode-btn::before {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--white);
+
+  transition: left 0.2s ease-in;
+}
+/* после указания position белый круг
+перекрывает иконку солнца,
+укажем для солнца position relative,
+таким образом он станет родителем для
+белого фона, и его z индекс будет выше! */
+.dark-mode-btn__icon {
+  position: relative;
+}
+/* для показа что активно,
+светлый режим или ночной,
+сдвигаем белый фон,
+можно написать так,НО не будет анимации */
+/* .dark-mode-btn--active::before {
+  left: unset;
+  right: 1px;
+} */
+.dark-mode-btn--active::before {
+  left: 26px;
+  right: 1px;
+}
+
+/* сделали выше
+.nav-row {
+  justify-content: flex-end;
+} */
+/* .logo {
+  margin-right: auto;
+} */
+/* .dark-mode-btn {
+  order: 9; 
+  хоть 1 главное не 0
+} */
+
+@media (max-width: 620px) {
+  .header {
+    /* отменяем min-height */
+    min-height: unset;
+  }
+  .header__title {
+    font-size: 30px;
+  }
+  .header__title strong {
+    font-size: 40px;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+  .title-1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+
+  .project__title {
+    font-size: 22px;
+  }
+
+  .footer {
+    padding: 40px 0px 30px;
+  }
+  .footer__wrapper {
+    row-gap: 20px;
+  }
+  .social {
+    column-gap: 20px;
+  }
+  .social__item {
+    width: 30px;
+  }
+
+  .title-2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+  }
+  .content-list {
+    row-gap: 20px;
+  }
+  .content-list__item {
+    font-size: 16px;
+  }
+
+  .project-details__desc {
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  /* чиним кнопку на мобилах */
+  .nav-row {
+    justify-content: space-between;
+  }
+  .dark-mode-btn {
+    order: 0;
+  }
+}
